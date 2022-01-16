@@ -7,8 +7,10 @@ import { ProductComponent } from './components/product/product.component';
 import { ProductsComponent } from './components/products/products.component';
 import { NavComponent } from './components/nav/nav.component';
 import { ImgComponent } from './components/img/img.component';
-
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { ReversePipe } from './pipes/reverse.pipe';
+import { HighlightDirective } from './directives/highlight.directive';
 
 @NgModule({
   declarations: [
@@ -16,12 +18,15 @@ import { FormsModule } from '@angular/forms';
     ProductComponent,
     ProductsComponent,
     NavComponent,
-    ImgComponent
+    ImgComponent,
+    ReversePipe,
+    HighlightDirective
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -11,46 +11,46 @@ export class ImgComponent implements OnInit ,OnChanges, AfterViewInit, OnDestroy
   @Input('img')
   set changeImg(newImg: string){
     this.img = newImg;
-    console.log('Change just img =>', this.img);
+    // console.log('Change just img =>', this.img);
   }
   
   @Input() alt: string ='';
   @Output() loaded = new EventEmitter<String>();
   imageDefault = './assets/images/default.jpg';
-  counter =0;
-counterFn : number | undefined;
+  // counter =0;
+  // counterFn : number | undefined;
 
   constructor() { 
     //before render
     //No async --once time
-    console.log('constructor','imgValue =>', this.img);
+    // console.log('constructor','imgValue =>', this.img);
   }
   ngOnChanges(){
     //before - during render
     //changes inputs -- multiples times
-    console.log('ngOnChanges','imgValue =>', this.img);
+    // console.log('ngOnChanges','imgValue =>', this.img);
   }
   ngOnInit(): void {
     //before render
     //async -- fetch -- once time
-    console.log('ngOnInit','imgValue =>', this.img);
-    this.counterFn = window.setInterval(() =>{
-      this.counter +=1;
-      console.log('run counter');
-    },1000);
+    // console.log('ngOnInit','imgValue =>', this.img);
+    // this.counterFn = window.setInterval(() =>{
+    //   this.counter +=1;
+    //   console.log('run counter');
+    // },1000);
 
   }
 
   ngAfterViewInit(){
     //after render
     //handler children --once time
-    console.log('AfterViewInit');
+    // console.log('AfterViewInit');
   }
 
 
   ngOnDestroy(){
-    console.log('ngOnDestroy');
-    window.clearInterval(this.counterFn);
+    // console.log('ngOnDestroy');
+    // window.clearInterval(this.counterFn);
   }
 
   imgError(){
@@ -58,7 +58,7 @@ counterFn : number | undefined;
   }
 
   imgLoaded(){
-    console.log("Log Hijo");
+    // console.log("Log Hijo");
     this.loaded.emit(this.img);
   }
 

@@ -1,5 +1,8 @@
+import { isNgTemplate } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import {Product} from '../../models/product.model'
+import {StoreService} from '../../services/store.service'
+import {ProductsService} from '../../services/products.service'
 
 @Component({
   selector: 'app-products',
@@ -7,35 +10,28 @@ import {Product} from '../../models/product.model'
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit {
-  products: Product [] =[
-    {
-      id:'1',
-      name: 'product 1',
-      image: './assets/images/album.jpg',
-      price: 100
-    },
-    {
-      id:'2',
-      name: 'product 2',
-      image: './assets/images/bike.jpg',
-      price: 200
-    },
-    {
-      id:'3',
-      name: 'product 3',
-      image: './assets/images/books.jpg',
-      price: 300
-    },
-    {
-      id:'4',
-      name: 'product 4',
-      image: './assets/images/house.jpg',
-      price: 400
-    }
-]
-  constructor() { }
+  myShoppingCart:Product [] =[];
+  total = 0;
+  products: Product [] =[];
+  today = new Date();
+  date = new Date(2022,1,14);
+
+  constructor(
+    private storeService: StoreService,
+    private productsService: ProductsService
+  ) {
+    this.myShoppingCart = storeService.getMyShoppingCart();
+   }
 
   ngOnInit(): void {
+    this.productsService.getAllProducts()
+    .subscribe(data =>{
+      this.products = data;
+    });
   }
 
+  onAddToShoppingCart(product:Product){
+    this.storeService.addProduct(product);
+    this.total =  this.storeService.getTotal();
+  }
 }
