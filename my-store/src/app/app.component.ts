@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import {Product} from './models/product.model'
+
+import { UsersService } from './services/users.service';
 
 @Component({
   selector: 'app-root',
@@ -7,17 +8,31 @@ import {Product} from './models/product.model'
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  imgParent = 'https://www.w3schools.com/howto/img_avatar.png';
+  imgParent = '';
+  showImg = true;
+  token = '';
 
-  showImg= true;
+  constructor(
+    private usersService: UsersService
+  ) {}
 
-  onLoaded(img: String){
-    // console.log("Log Padre",img);
+
+  onLoaded(img: string) {
+    console.log('log padre', img);
   }
- 
-  toggleImg(){
+
+  toggleImg() {
     this.showImg = !this.showImg;
   }
+
+  createUser() {
+    this.usersService.create({
+      name: 'Sebas',
+      email: 'sebas@mail.com',
+      password: '1212'
+    })
+    .subscribe(rta => {
+      console.log(rta);
+    });
+  }
 }
-
-
