@@ -55,8 +55,12 @@ const routes: Routes = [
       {
         path: 'product/:id' ,
         component: ProductDetailComponent
-      }
+      },
     ]
+  },
+  {
+    path:'cms',
+    loadChildren: ()=> import('./cms/cms.module').then(m =>m.CmsModule)
   },
   {
     path: '**' ,
